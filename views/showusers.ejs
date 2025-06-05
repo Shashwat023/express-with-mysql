@@ -31,13 +31,17 @@
                     <button>edit username</button>
                 </form>
             </td>
+
+            <td>
+                <form method="get" action = "/users/<%=user.id%>/delete">
+                    <button>delete user</button>
+                </form>
+            </td>
             </tr>
 
         <% } %>
 
-        <form method = "post" action = "/users">
-            <button>add user</button>
-        </form>
+        <button><a href = "http://localhost:8080/users/new">Add new user!</a></button>
 
     </table>
 

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete user!</title>
+</head>
+<body>
+    <h2> u r going to delete this user: <%= user.username %></h2>
+
+    <form method = "post" action = "/users/<%=user.id%>?_method=DELETE">
+        <input name = "email" placeholder = "enter ur email"/>
+        <input type = "password" name = "password" placeholder = "enter ur password"/>
+        <button>submit!</button>
+    </form>
+</body>
+</html>

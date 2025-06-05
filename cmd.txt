@@ -1,11 +1,37 @@
-// for inserting 100 users data
-
+// for inserting 100 users data:-
 let q = "INSERT INTO user (id, username, email, password) VALUES ?";
 let data = [];
 for (let i = 1; i<=100; i++){
   data.push(getRandomUser());
 }
 
-// to start mysql 
-
+// to start mysql:-
 & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p
+
+//the complicated yet simple snippet:-
+app.patch("/users/:id", (req, res) => {
+  let {id} = req.params;
+  let {password: formPass, username: newUsername} = req.body;
+  let q = `SELECT * FROM user WHERE id = '${id}'`;
+
+  try{
+    connection.query (q, (err, result) => {
+    if(err) throw err;
+      let user = result[0];
+      if (formPass != user.password){
+        res.send("wrong pass");
+      }
+      else{
+        let q2 = `UPDATE user SET username = '${newUsername}' WHERE id = '${id}'`;
+        connection.query(q2, (err, result) => {
+          if (err) throw err;
+          res.redirect("/users");
+        });
+      }
+      console.log(result);
+  });
+  } catch (err) {
+      console.log(err);
+      res.send("some error at DB");
+  }
+});
